@@ -1,3 +1,4 @@
+package Tests;
 
 import org.json.JSONObject;
 import org.junit.Test;
