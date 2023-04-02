@@ -2,8 +2,12 @@ package TestDatalari;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TestDataHerokuapp {
-     /*
+
+    /*
     {
                         "firstname" : "Mehmet",
                         "lastname" : “Dag",
@@ -64,4 +68,66 @@ public class TestDataHerokuapp {
         return responseBody;
     }
 
+    /*
+    {
+                            "firstname" : "Ahmet",
+                            "lastname" : “Bulut",
+                            "totalprice" : 500,
+                            "depositpaid" : false,
+                            "bookingdates" : {
+                                     "checkin" : "2021-06-01",
+                                     "checkout" : "2021-06-10"
+                                              },
+                            "additionalneeds" : "wi-fi"
+                        }
+     */
+
+    public static Map<String,Object> requestBodyMapOlustur(){
+
+        Map<String,Object> requestBodyMap= new HashMap<>();
+        requestBodyMap.put("firstname","Ahmet");
+        requestBodyMap.put("lastname","Bulut");
+        requestBodyMap.put("totalprice",500.0);
+        requestBodyMap.put("depositpaid",false);
+        requestBodyMap.put("bookingdates",bookingdatesMapOlustur());
+        requestBodyMap.put("additionalneeds","wi-fi");
+
+        return requestBodyMap;
+    }
+
+    public static Map<String,String> bookingdatesMapOlustur(){
+
+        Map<String,String > bookingdatesMap= new HashMap<>();
+        bookingdatesMap.put("checkin","2021-06-01");
+        bookingdatesMap.put("checkout","2021-06-10");
+
+        return bookingdatesMap;
+    }
+
+    /*
+    Response Body // expected data
+                        {
+                        "bookingid":24,
+                        "booking":{
+                            "firstname":"Ahmet",
+                            "lastname":"Bulut",
+                            "totalprice":500,
+                            "depositpaid":false,
+                            "bookingdates":{
+                                "checkin":"2021-06-01",
+                                "checkout":"2021-06-10"
+                            ,
+                            "additionalneeds":"wi-fi"
+                        }
+     */
+
+    public static Map<String,Object> responseBodyMapOlustur(){
+
+        Map<String,Object> responseBodyMap= new HashMap<>();
+
+        responseBodyMap.put("bookingid",24);
+        responseBodyMap.put("booking",requestBodyMapOlustur());
+
+        return responseBodyMap;
+    }
 }
